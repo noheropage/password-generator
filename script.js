@@ -14,21 +14,14 @@ function writePassword() {
       passLength = parseInt(prompt("Choose a password length between 8 and 128 characters: "))
     }
 
-    
-
-    // var validation = false;
-    // console.log(validation); 
+    // continue to ask user to choose character types until valid input is received 
     do {
       var passChar = prompt("Pick one or more of the following character types to include in the password (lowercase, uppercase, numeric, and/or special): ")
-      // turns user input into an array 
-      var passOptions = passChar.split(" ");
-
+      // turns user input into an array of lowercase strings
+      var passOptions = passChar.toLowerCase().split(" ");
     }
+    // searches array for valid input 
     while (passOptions.includes("lowercase") === false && passOptions.includes("uppercase") === false && passOptions.includes("numeric") === false && passOptions.includes("special") === false);      // passChar = prompt("Please select at least one (lowercase, uppercase, numeric, special): ")
-      
-
-
-    var optionLength = passOptions.length;
 
     // strings of possible characters for a password 
     var lowerCase = "abcdefghijklmnopqrstuvwxyz"
@@ -38,11 +31,11 @@ function writePassword() {
 
     // holds all possible characters 
     var superPassword = "";
-    // holds characters that will be chosen at random 
+    // holds characters of the generated password to be chosen at random 
     var realPassword = "";
 
-    // takes user selection and adds related characters to a master string 
-    for (i = 0; i < optionLength; i++) {
+    // takes user character selection and adds related characters to a master string 
+    for (i = 0; i < passOptions.length; i++) {
       if (passOptions[i] === "lowercase") {
         superPassword += lowerCase;
       } else if (passOptions[i] === "uppercase") {
@@ -51,7 +44,7 @@ function writePassword() {
         superPassword += numbers;
       } else if (passOptions[i] === "special") {
         superPassword += specialChar;
-      } 
+      }
     }
 
     // chooses a random character from a master list of possible password characters for each character in the final password 
@@ -60,22 +53,9 @@ function writePassword() {
     }
     return realPassword;
   };
-  
+  // updates textbox with the new password 
   passwordText.value = password;
-
 }
-
-
-// Criteria
-// Length (8 - 128 chars)
-
-// char type (lower, upper, #, and/or special)
-
-// TODO input validation (ensure at least one char type selected)
-
-// generate password with criteria
-
-
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
